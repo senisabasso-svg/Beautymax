@@ -264,13 +264,17 @@ h2 {
   width: min(180px, 95%);
   max-height: 58px;
   object-fit: contain;
-  filter: grayscale(100%);
-  opacity: 0.92;
-  transition: filter 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+  opacity: 0.98;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.brand-logo--light {
+  background: #1f2433;
+  border-radius: 10px;
+  padding: 8px 14px;
 }
 
 .brand-card:hover .brand-logo {
-  filter: grayscale(0%);
   opacity: 1;
   transform: scale(1.03);
 }

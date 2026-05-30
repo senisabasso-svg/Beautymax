@@ -5,6 +5,7 @@ const BRANDS = [
   {
     name: "Silkey Mundial",
     logo: "/brands/silkey-mundial.png",
+    logoTone: "light",
     source: "https://tienda.silkeymundial.com/",
   },
   {
@@ -15,6 +16,7 @@ const BRANDS = [
   {
     name: "Plasma",
     logo: "/brands/pro-plasma-esthetic.png",
+    logoTone: "light",
     source:
       "https://www.bing.com/images/search?view=detailV2&ccid=Iw4a%2fRND&id=D28A95B01076269F3C869386758205F429D3FACB&thid=OIP.Iw4a_RND8elzoj0jRZ8UMQHaCY&mediaurl=https%3a%2f%2flipglossandaftershave.com%2fwp-content%2fuploads%2f2024%2f01%2fPro-Plasma-Esthetics-Logo-DD.png",
   },
@@ -373,7 +375,11 @@ function App() {
                   {visibleBrands.map((brand) => (
                     <li key={`${brand.name}-${index}`} className="brand-card">
                       <a href={brand.source} target="_blank" rel="noreferrer" aria-label={brand.name}>
-                        <img src={brand.logo} alt={`Logo ${brand.name}`} className="brand-logo" />
+                        <img
+                          src={brand.logo}
+                          alt={`Logo ${brand.name}`}
+                          className={`brand-logo ${brand.logoTone === "light" ? "brand-logo--light" : ""}`}
+                        />
                       </a>
                     </li>
                   ))}
