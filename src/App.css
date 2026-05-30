@@ -319,12 +319,108 @@ h2 {
   box-shadow: var(--shadow);
 }
 
-.product-card p {
+.product-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.02rem;
+}
+
+.product-short-description {
   margin: 0 0 14px;
-  font-weight: 600;
+  color: var(--muted);
+  font-weight: 500;
 }
 
 .product-card a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.products-catalog-section {
+  background: linear-gradient(180deg, rgba(106, 92, 255, 0.08), rgba(255, 255, 255, 0));
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.catalog-card {
+  border-radius: 16px;
+  padding: 14px;
+  border: 1px solid #dfe3f4;
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 10px;
+}
+
+.catalog-image {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #f7f7f7;
+}
+
+.catalog-card h3 {
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+.catalog-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.catalog-card a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.tools-section {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(106, 92, 255, 0.06));
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.tool-card {
+  border-radius: 16px;
+  padding: 14px;
+  border: 1px solid #dfe3f4;
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 10px;
+}
+
+.tool-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #f7f7f7;
+}
+
+.tool-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.tool-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.tool-card a {
   color: var(--primary);
   text-decoration: none;
   font-weight: 700;
@@ -371,6 +467,14 @@ footer a {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .tools-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .catalog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .brand-card {
     min-height: 120px;
   }
@@ -382,7 +486,9 @@ footer a {
 
 @media (max-width: 480px) {
   .categories-grid,
-  .products-grid {
+  .products-grid,
+  .catalog-grid,
+  .tools-grid {
     grid-template-columns: 1fr;
   }
 

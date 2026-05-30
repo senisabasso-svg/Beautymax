@@ -4,7 +4,7 @@ import "./App.css";
 const BRANDS = [
   {
     name: "Silkey Mundial",
-    logo: "/brands/silkey.webp",
+    logo: "https://images.seeklogo.com/logo-png/17/2/silkey-logo-png_seeklogo-177325.png",
     source: "https://tienda.silkeymundial.com/",
   },
   {
@@ -20,19 +20,15 @@ const BRANDS = [
   },
   {
     name: "Wella Professionals",
-    logo: "/brands/wella.jpg",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Wella-Company-logo.jpg/1200px-Wella-Company-logo.jpg",
     source: "https://www.wella.com/professional/es-ES",
-  },
-  {
-    name: "L'Oreal Professionnel",
-    logo: "/brands/loreal.jpg",
-    source:
-      "https://m.media-amazon.com/images/S/aplus-media/vc/7ed54674-514c-4a03-83c9-7258c5236bd0.__CR0,0,970,300_PT0_SX970_V1___.jpg",
   },
 ];
 
-const WHATSAPP_URL =
-  "https://wa.me/59897428888?text=Hola%20Beautymax%2C%20quiero%20consultar%20por%20sus%20productos.";
+const WHATSAPP_PHONE = "59897428888";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(
+  "Hola Beautymax, quiero consultar por sus productos.",
+)}`;
 
 const CATEGORIES = [
   { title: "Capilar", description: "Coloracion, tratamientos, styling y cuidado profesional." },
@@ -42,12 +38,88 @@ const CATEGORIES = [
 ];
 
 const FEATURED_PRODUCTS = [
-  "Tratamientos capilares",
-  "Maquinas de corte profesional",
-  "Insumos para coloracion",
-  "Productos de barberia",
-  "Accesorios para salon",
-  "Herramientas de manicuria",
+  { name: "Tratamientos capilares", description: "Nutricion y reparacion." },
+  { name: "Maquinas de corte", description: "Precision profesional." },
+  { name: "Coloracion profesional", description: "Cobertura y brillo." },
+  { name: "Productos de barberia", description: "Cuidado y acabado." },
+  { name: "Accesorios para salon", description: "Uso diario en cabina." },
+  { name: "Herramientas de manicuria", description: "Detalle y definicion." },
+];
+
+const TOOLS_PRODUCTS = [
+  {
+    name: "Tijera Kiepe Pro Cut 5.5",
+    image: "/herramientas/kiepe-pro-cut-pack.png",
+    description: "Corte preciso diario.",
+  },
+  {
+    name: "Tijera Kiepe Ergonomica Silver",
+    image: "/herramientas/kiepe-ergonomic-silver.png",
+    description: "Comodidad y control.",
+  },
+  {
+    name: "Tijera Kiepe Gold Edition",
+    image: "/herramientas/kiepe-gold-main.png",
+    description: "Acabado premium.",
+  },
+  {
+    name: "Tijera de Entresacar Kiepe",
+    image: "/herramientas/kiepe-entresacar-main.png",
+    description: "Textura sin perder forma.",
+  },
+  {
+    name: "Trimmer Hepike Profesional",
+    image: "/herramientas/hepike-trimmer.png",
+    description: "Detalles y contornos.",
+  },
+];
+
+const PRODUCTS_CATALOG = [
+  {
+    name: "Pro You The Lifter Bleaching Powder",
+    image: "/productos/proyou-lifter-campana.png",
+    description: "Decoloracion uniforme.",
+  },
+  {
+    name: "Pro You The Color Maker",
+    image: "/productos/proyou-colormaker-campana.png",
+    description: "Color intenso duradero.",
+  },
+  {
+    name: "Pro You Color Maker 90 ml",
+    image: "/productos/proyou-colormaker-pack.png",
+    description: "Presentacion 90 ml.",
+  },
+  {
+    name: "Linea Pro You Color Maker",
+    image: "/productos/proyou-colormaker-linea.png",
+    description: "Variedad de tonos.",
+  },
+  {
+    name: "Coloracion + Aloe Vera",
+    image: "/productos/proyou-aloe-vera.png",
+    description: "Con aloe vera.",
+  },
+  {
+    name: "Silkey Colorkey Milenium",
+    image: "/productos/silkey-colorkey-milenium.png",
+    description: "Coloracion en crema.",
+  },
+  {
+    name: "Pro You The Setter Hairspray",
+    image: "/productos/proyou-setter-hairspray.png",
+    description: "Fijacion extrema.",
+  },
+  {
+    name: "Pro You Deco Revlon",
+    image: "/productos/proyou-deco-revlon.png",
+    description: "Deco alto rendimiento.",
+  },
+  {
+    name: "Wella Color Touch",
+    image: "/productos/wella-color-touch.png",
+    description: "Tono sobre tono.",
+  },
 ];
 
 function App() {
@@ -93,6 +165,11 @@ function App() {
     return BRANDS[brandIndex];
   });
 
+  const getWhatsappProductUrl = (productName) =>
+    `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(
+      `Hola Beautymax, quiero consultar por ${productName}.`,
+    )}`;
+
   return (
     <>
       <header className="site-header">
@@ -101,6 +178,8 @@ function App() {
           <nav className="header-nav">
             <a href="#categorias">Categorias</a>
             <a href="#marcas">Marcas</a>
+            <a href="#productos">Productos</a>
+            <a href="#herramientas">Herramientas</a>
             <a href="#contacto">Contacto</a>
           </nav>
           <a className="mini-whatsapp" href={WHATSAPP_URL} target="_blank" rel="noreferrer">
@@ -201,10 +280,63 @@ function App() {
             </div>
             <div className="products-grid">
               {FEATURED_PRODUCTS.map((item) => (
-                <article key={item} className="product-card">
-                  <p>{item}</p>
-                  <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
-                    Consultar
+                <article key={item.name} className="product-card">
+                  <h3>{item.name}</h3>
+                  <p className="product-short-description">{item.description}</p>
+                  <a href={getWhatsappProductUrl(item.name)} target="_blank" rel="noreferrer">
+                    Consultar por WhatsApp
+                  </a>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="productos" className="products-catalog-section">
+          <div className="container">
+            <div className="featured-head">
+              <h2>Productos</h2>
+              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
+                Pedir lista completa
+              </a>
+            </div>
+            <p className="section-description">
+              Catalogo de coloracion, decoloracion y styling profesional para salones.
+            </p>
+            <div className="catalog-grid">
+              {PRODUCTS_CATALOG.map((product) => (
+                <article key={product.name} className="catalog-card">
+                  <img src={product.image} alt={product.name} className="catalog-image" />
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
+                  <a href={getWhatsappProductUrl(product.name)} target="_blank" rel="noreferrer">
+                    Consultar por WhatsApp
+                  </a>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="herramientas" className="tools-section">
+          <div className="container">
+            <div className="featured-head">
+              <h2>Herramientas</h2>
+              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
+                Consultar stock
+              </a>
+            </div>
+            <p className="section-description">
+              Seleccion de herramientas profesionales para peluqueria y barberia.
+            </p>
+            <div className="tools-grid">
+              {TOOLS_PRODUCTS.map((product) => (
+                <article key={product.name} className="tool-card">
+                  <img src={product.image} alt={product.name} className="tool-image" />
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
+                  <a href={getWhatsappProductUrl(product.name)} target="_blank" rel="noreferrer">
+                    Pedir por WhatsApp
                   </a>
                 </article>
               ))}
