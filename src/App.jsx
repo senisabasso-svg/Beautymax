@@ -244,6 +244,7 @@ const PRODUCTS_CATALOG = [
 function App() {
   const [index, setIndex] = useState(0);
   const [visibleCards, setVisibleCards] = useState(3);
+  const totalProducts = PRODUCTS_CATALOG.length + TOOLS_PRODUCTS.length;
 
   useEffect(() => {
     const updateVisibleCards = () => {
@@ -307,36 +308,93 @@ function App() {
         </div>
       </header>
 
-      <section className="hero">
-        <div className="container hero-content">
-          <div className="hero-copy">
-            <p className="hero-eyebrow">Distribucion mayorista y minorista</p>
-            <h1>Todo para peluqueria, barberia y estetica en un solo lugar</h1>
-            <p>
-              Beautymax trabaja con marcas lideres para profesionales y salones. Asesoramiento,
-              stock actualizado y envios.
-            </p>
-            <div className="hero-actions">
-              <a className="whatsapp-button" href={WHATSAPP_URL} target="_blank" rel="noreferrer">
-                Pedir por WhatsApp
-              </a>
-              <a
-                className="instagram-button"
-                href="https://www.instagram.com/beautymaxuy/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Ver Instagram
-              </a>
+      <section className="poster-hero">
+        <div className="container">
+          <div className="poster-card">
+            <div className="poster-top">
+              <p className="poster-brand-main">BEAUTYMAX</p>
+              <p className="poster-kicker">DISTRIBUIDORA</p>
+              <p className="poster-subtitle">PROFESIONALES DE LA BELLEZA</p>
             </div>
-          </div>
-          <div className="hero-logo-wrap">
-            <img
-              src="/logo-beautymax-transparent.png"
-              alt="Logo de Beautymax"
-              className="logo"
-            />
-            <div className="hero-badge">Atencion personalizada</div>
+
+            <div className="poster-body">
+              <p className="poster-line">
+                Mas de <span>40</span> anos
+              </p>
+              <p className="poster-line">Trabajando con</p>
+              <p className="poster-title">Exclusividad total</p>
+              <p className="poster-line">
+                al <strong>profesional</strong>
+              </p>
+
+              <p className="poster-line">Trabajamos con las</p>
+              <p className="poster-line poster-line--violet">Mejores marcas</p>
+
+              <div className="poster-brands">
+                <a href="https://www.revlonprofessional.com/" target="_blank" rel="noreferrer" className="poster-brand-item poster-brand-item--single">
+                  <span className="poster-brand-text">REVLON</span>
+                  <small>PROFESSIONAL</small>
+                </a>
+                <a
+                  href={BRANDS[3].source}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="poster-brand-item poster-brand-item--single"
+                >
+                  <img src={BRANDS[3].logo} alt={`Logo ${BRANDS[3].name}`} className="poster-brand-logo" />
+                </a>
+                <a
+                  href={BRANDS[1].source}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="poster-brand-item poster-brand-item--single"
+                >
+                  <img src={BRANDS[1].logo} alt={`Logo ${BRANDS[1].name}`} className="poster-brand-logo" />
+                </a>
+                <div className="poster-brand-row">
+                  <a href={BRANDS[2].source} target="_blank" rel="noreferrer" className="poster-brand-item">
+                    <img
+                      src={BRANDS[2].logo}
+                      alt={`Logo ${BRANDS[2].name}`}
+                      className={`poster-brand-logo ${BRANDS[2].logoTone === "light" ? "poster-brand-logo--light" : ""}`}
+                    />
+                  </a>
+                  <a
+                    href={BRANDS[0].source}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="poster-brand-item poster-brand-item--divider"
+                  >
+                    <img
+                      src={BRANDS[0].logo}
+                      alt={`Logo ${BRANDS[0].name}`}
+                      className={`poster-brand-logo ${BRANDS[0].logoTone === "light" ? "poster-brand-logo--light" : ""}`}
+                    />
+                  </a>
+                </div>
+              </div>
+
+              <p className="poster-claim">Juntos, potenciamos tu talento.</p>
+              <p className="poster-slogan">Tu creas belleza, nosotros te acompanamos.</p>
+
+              <div className="poster-website-wrap">
+                <a className="poster-website" href="https://beautymaxuy.com/" target="_blank" rel="noreferrer">
+                  Visita nuestra pagina <strong>beautymaxuy.com</strong>
+                </a>
+              </div>
+
+              <div className="poster-meta">
+                <span>+598 97 428 888</span>
+                <span>{CATEGORIES.length} categorias</span>
+                <span>{totalProducts} productos</span>
+              </div>
+
+              <div className="poster-benefits">
+                <span>Ofertas exclusivas</span>
+                <span>Envios a todo el pais</span>
+                <span>Confianza total</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
