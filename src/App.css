@@ -358,10 +358,10 @@ h2 {
 
 .catalog-image {
   width: 100%;
-  height: 240px;
-  object-fit: cover;
+  height: 280px;
+  object-fit: contain;
   border-radius: 12px;
-  background: #f7f7f7;
+  background: #ffffff;
 }
 
 .catalog-card h3 {
@@ -403,10 +403,10 @@ h2 {
 
 .tool-image {
   width: 100%;
-  height: 220px;
-  object-fit: cover;
+  height: 280px;
+  object-fit: contain;
   border-radius: 12px;
-  background: #f7f7f7;
+  background: #ffffff;
 }
 
 .tool-card h3 {
@@ -424,6 +424,23 @@ h2 {
   color: var(--primary);
   text-decoration: none;
   font-weight: 700;
+}
+
+.tools-video-loop-wrap {
+  margin-top: 26px;
+  border-radius: 16px;
+  padding: 14px;
+  border: 1px solid #dfe3f4;
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+.tool-video {
+  width: 100%;
+  border-radius: 12px;
+  background: #000000;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
 
 footer {
