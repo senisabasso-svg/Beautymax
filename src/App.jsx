@@ -131,8 +131,15 @@ const PRODUCTS_CATALOG = [
   },
 ];
 
+function WhatsappIcon() {
+  return (
+    <svg className="whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12.04 2.01a9.94 9.94 0 0 0-8.56 15.01L2 22l5.11-1.34a9.98 9.98 0 0 0 4.92 1.29h.01c5.52 0 10-4.48 10-9.99a9.95 9.95 0 0 0-10-9.95Zm0 18.13h-.01a8.28 8.28 0 0 1-4.22-1.15l-.3-.18-3.03.79.81-2.95-.2-.31a8.19 8.19 0 0 1 6.95-12.58 8.18 8.18 0 0 1 8.2 8.2 8.2 8.2 0 0 1-8.2 8.18Zm4.5-6.17c-.25-.13-1.47-.72-1.7-.8-.22-.08-.38-.13-.55.13-.17.25-.64.8-.79.97-.15.17-.29.18-.54.06-.25-.13-1.06-.39-2.02-1.24-.74-.67-1.25-1.49-1.4-1.74-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.24-.42.08-.17.04-.31-.02-.43-.07-.12-.55-1.34-.75-1.84-.2-.48-.4-.42-.55-.43-.14 0-.31-.01-.47-.01-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.43 1.03 2.6c.12.16 1.76 2.69 4.26 3.77.6.26 1.06.41 1.43.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.09-.22-.15-.47-.27Z" />
+    </svg>
+  );
+}
+
 function App() {
-  const totalProducts = PRODUCTS_CATALOG.length + TOOLS_PRODUCTS.length;
   const featuredProducts = PRODUCTS_CATALOG;
   const featuredTools = TOOLS_PRODUCTS;
 
@@ -162,24 +169,19 @@ function App() {
 
       <section id="inicio" className="hero-section">
         <div className="container hero-content">
-          <p className="hero-kicker">Nuevo lanzamiento</p>
-          <h1>Distribuidora profesional para peluqueria y barberia</h1>
-          <p className="hero-description">
-            Formato visual renovado, rapido y claro para destacar colecciones, productos y marcas,
-            con contacto directo por WhatsApp.
-          </p>
+          <img
+            src="/hero/beautymax-hero-poster.png"
+            alt="Beautymax Distribuidora - Profesionales de la belleza"
+            className="hero-poster"
+          />
           <div className="hero-actions">
             <a href="#productos" className="cta-main">
               Ver productos
             </a>
-            <a href={WHATSAPP_URL} className="cta-secondary" target="_blank" rel="noreferrer">
+            <a href={WHATSAPP_URL} className="cta-secondary whatsapp-link" target="_blank" rel="noreferrer">
+              <WhatsappIcon />
               Consultar por WhatsApp
             </a>
-          </div>
-          <div className="hero-meta">
-            <span>{totalProducts} productos</span>
-            <span>{CATEGORIES.length} colecciones</span>
-            <span>+598 97 428 888</span>
           </div>
         </div>
       </section>
@@ -189,7 +191,8 @@ function App() {
           <div className="container">
             <div className="section-head">
               <h2>Productos destacados</h2>
-              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
+              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="whatsapp-link">
+                <WhatsappIcon />
                 Ver catalogo completo
               </a>
             </div>
@@ -198,9 +201,9 @@ function App() {
                 <article key={product.name} className="product-card">
                   <img src={product.image} alt={product.name} />
                   <h3>{product.name}</h3>
-                  <p>{product.description}</p>
-                  <a href={getWhatsappProductUrl(product.name)} target="_blank" rel="noreferrer">
-                    Consultar
+                  <a href={getWhatsappProductUrl(product.name)} target="_blank" rel="noreferrer" className="whatsapp-link">
+                    <WhatsappIcon />
+                    Consultar por WhatsApp
                   </a>
                 </article>
               ))}
@@ -212,7 +215,8 @@ function App() {
           <div className="container">
             <div className="section-head">
               <h2>Herramientas recomendadas</h2>
-              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
+              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="whatsapp-link">
+                <WhatsappIcon />
                 Consultar stock
               </a>
             </div>
@@ -221,9 +225,9 @@ function App() {
                 <article key={product.name} className="product-card">
                   <img src={product.image} alt={product.name} />
                   <h3>{product.name}</h3>
-                  <p>{product.description}</p>
-                  <a href={getWhatsappProductUrl(product.name)} target="_blank" rel="noreferrer">
-                    Consultar
+                  <a href={getWhatsappProductUrl(product.name)} target="_blank" rel="noreferrer" className="whatsapp-link">
+                    <WhatsappIcon />
+                    Consultar por WhatsApp
                   </a>
                 </article>
               ))}
@@ -286,7 +290,8 @@ function App() {
             </p>
             <p>
               Contacto directo:{" "}
-              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
+              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="whatsapp-link">
+                <WhatsappIcon />
                 +598 97 428 888
               </a>
             </p>

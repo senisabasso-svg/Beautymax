@@ -73,46 +73,30 @@ body {
 }
 
 .hero-section {
-  background:
-    linear-gradient(rgba(9, 9, 9, 0.44), rgba(9, 9, 9, 0.44)),
-    url("/herramientas/kiepe-gold-duo-set.png") center / cover no-repeat;
-  color: #ffffff;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
 }
 
 .hero-content {
-  min-height: 470px;
+  min-height: auto;
   display: grid;
-  align-content: center;
-  gap: 12px;
-  padding: 50px 0;
+  gap: 14px;
+  padding: 20px 0 28px;
 }
 
-.hero-kicker {
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
-h1 {
-  margin: 0;
-  font-size: clamp(2rem, 4.4vw, 3.25rem);
-  max-width: 16ch;
-  line-height: 1.08;
-}
-
-.hero-description {
-  margin: 0;
-  max-width: 66ch;
-  color: #f1f1f1;
+.hero-poster {
+  width: 100%;
+  max-width: 980px;
+  justify-self: center;
+  border-radius: 8px;
+  border: 1px solid var(--border);
 }
 
 .hero-actions {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-top: 6px;
+  justify-content: center;
 }
 
 .cta-main,
@@ -125,27 +109,29 @@ h1 {
 }
 
 .cta-main {
-  background: #ffffff;
-  color: #111111;
-}
-
-.cta-secondary {
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: #111111;
   color: #ffffff;
 }
 
-.hero-meta {
-  margin-top: 10px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+.cta-main:hover {
+  opacity: 0.92;
 }
 
-.hero-meta span {
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 999px;
-  padding: 6px 12px;
-  font-size: 0.8rem;
+.cta-secondary {
+  border: 1px solid #111111;
+  color: #111111;
+}
+
+.whatsapp-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.whatsapp-icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
 }
 
 main section {
@@ -353,10 +339,6 @@ h2 {
 @media (max-width: 760px) {
   .site-nav {
     display: none;
-  }
-
-  .hero-content {
-    min-height: 400px;
   }
 
   .footer-inner {
