@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 
 const BRANDS = [
@@ -81,6 +82,16 @@ const TOOLS_PRODUCTS = [
     image: "/herramientas/kiepe-zurdo-front.png",
     description: "Calidad 4 estrelllas - acero japones - filo de navaja - tijera para zurdos",
   },
+  {
+    name: "Kiepe Procut",
+    image: "/herramientas/kiepe-procut-nueva.png",
+    description: "Calidad 4 estrelllas - acero japones - filo de navaja",
+  },
+  {
+    name: "Maquinas Hepike By Kiepe",
+    image: "/herramientas/maquinas-hepike-by-kiepe.png",
+    description: "Maquina profesional para terminaciones y detalles.",
+  },
 ];
 
 const PRODUCTS_CATALOG = [
@@ -88,6 +99,11 @@ const PRODUCTS_CATALOG = [
     name: "Pro You The Color Maker + Aloe Vera",
     image: "/productos/proyou-colormaker-aloe-vera.png",
     description: "Coloracion permanente 90 ml enriquecida con aloe vera para color y cuidado en un solo paso.",
+  },
+  {
+    name: "Pro You The Lifter 1 kg",
+    image: "/productos/proyou-lifter-balde.png",
+    description: "Polvo decolorante en balde para aclaraciones intensivas en cabina.",
   },
   {
     name: "Plasma Deco 9 Tonos",
@@ -120,15 +136,16 @@ const PRODUCTS_CATALOG = [
     description: "Laca de fijacion extrema con control de brillo para peinados duraderos.",
   },
   {
-    name: "Pro You The Lifter 1 kg",
-    image: "/productos/proyou-lifter-balde.png",
-    description: "Polvo decolorante en balde para aclaraciones intensivas en cabina.",
-  },
-  {
     name: "Plasma Mix Triaminico (Ampolla)",
     image: "/productos/plasma-mix-triaminico-ampolla.png",
     description: "Ampolla nutritiva concentrada para complementar tratamientos capilares.",
   },
+];
+
+const TOOLS_VIDEOS = [
+  "/videos/herramientas-1.mp4",
+  "/videos/herramientas-2.mp4",
+  "/videos/herramientas-3.mp4",
 ];
 
 function WhatsappIcon() {
@@ -142,11 +159,20 @@ function WhatsappIcon() {
 function App() {
   const featuredProducts = PRODUCTS_CATALOG;
   const featuredTools = TOOLS_PRODUCTS;
+  const [activeVideoIndex, setActiveVideoIndex] = useState(0);
 
   const getWhatsappProductUrl = (productName) =>
     `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(
       `Hola Beautymax, quiero consultar por ${productName}.`,
     )}`;
+
+  const showPrevVideo = () => {
+    setActiveVideoIndex((current) => (current - 1 + TOOLS_VIDEOS.length) % TOOLS_VIDEOS.length);
+  };
+
+  const showNextVideo = () => {
+    setActiveVideoIndex((current) => (current + 1) % TOOLS_VIDEOS.length);
+  };
 
   return (
     <>
@@ -274,6 +300,33 @@ function App() {
             <div className="newsletter-form" role="form" aria-label="Suscripcion a novedades">
               <input type="email" placeholder="Correo electronico" />
               <button type="button">Suscribirme</button>
+            </div>
+          </div>
+        </section>
+
+        <section className="videos-section">
+          <div className="container">
+            <h2>Videos de herramientas</h2>
+            <div className="video-carousel">
+              <button type="button" className="video-arrow" aria-label="Video anterior" onClick={showPrevVideo}>
+                &#10094;
+              </button>
+              <div className="video-frame">
+                <video
+                  key={TOOLS_VIDEOS[activeVideoIndex]}
+                  className="tools-video"
+                  src={TOOLS_VIDEOS[activeVideoIndex]}
+                  controls
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                />
+              </div>
+              <button type="button" className="video-arrow" aria-label="Siguiente video" onClick={showNextVideo}>
+                &#10095;
+              </button>
             </div>
           </div>
         </section>
