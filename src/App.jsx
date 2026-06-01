@@ -47,39 +47,39 @@ const CATEGORIES = [
 
 const TOOLS_PRODUCTS = [
   {
-    name: "Kiepe Entresacar con Estuche",
+    name: "Kiepe Italia - Monster cut",
     image: "/herramientas/kiepe-entresacar-kit.png",
-    description: "Tijera de entresacar profesional presentada en estuche premium.",
+    description: "Calidad 4 estrelllas - acero japones - filo de navaja",
   },
   {
-    name: "Kiepe Gold Set Corte y Pulido",
+    name: "Kiepe Italia - Monster cut",
     image: "/herramientas/kiepe-gold-duo-set.png",
-    description: "Set de tijeras doradas para corte y texturizado profesional.",
+    description: "Calidad 4 estrelllas - acero japones - filo de navaja",
   },
   {
-    name: "Kiepe Ergonomic Black en Estuche",
+    name: "Kiepe Italia - Monster cut",
     image: "/herramientas/kiepe-ergonomic-black-front.png",
-    description: "Modelo negro ergonomico con excelente balance y precision de corte.",
+    description: "Calidad 4 estrelllas - acero japones - filo de navaja",
   },
   {
-    name: "Kiepe Tijera para Zurdos",
+    name: "Kiepe Italia - Monster cut",
     image: "/herramientas/kiepe-zurdo-box.png",
-    description: "Version para zurdos en estuche de presentacion original.",
+    description: "Calidad 4 estrelllas - acero japones - filo de navaja",
   },
   {
-    name: "Kiepe Presentacion Caja Blanca",
+    name: "Kiepe Italia - Monster cut",
     image: "/herramientas/kiepe-presentacion-caja-blanca-nueva.png",
-    description: "Caja de presentacion de linea Kiepe, ideal para exhibicion y entrega.",
+    description: "Calidad 4 estrelllas - acero japones - filo de navaja",
   },
   {
-    name: "Kiepe Ergonomic Black Detalle",
+    name: "Kiepe Italia - Monster cut",
     image: "/herramientas/kiepe-ergonomic-black-closeup.png",
-    description: "Primer plano del modelo ergonomico black con terminacion premium.",
+    description: "Calidad 4 estrelllas - acero japones - filo de navaja",
   },
   {
-    name: "Kiepe Entresacar con Estuche - Tijera para zurdo",
+    name: "Kiepe Italia - Monster cut",
     image: "/herramientas/kiepe-zurdo-front.png",
-    description: "Modelo para zurdos en presentacion de estuche profesional.",
+    description: "Calidad 4 estrelllas - acero japones - filo de navaja - tijera para zurdos",
   },
 ];
 
@@ -222,9 +222,10 @@ function App() {
             </div>
             <div className="product-grid">
               {featuredTools.map((product) => (
-                <article key={product.name} className="product-card">
+                <article key={product.image} className="product-card">
                   <img src={product.image} alt={product.name} />
                   <h3>{product.name}</h3>
+                  <p>{product.description}</p>
                   <a href={getWhatsappProductUrl(product.name)} target="_blank" rel="noreferrer" className="whatsapp-link">
                     <WhatsappIcon />
                     Consultar por WhatsApp
