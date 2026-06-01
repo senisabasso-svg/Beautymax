@@ -2,27 +2,34 @@ import "./App.css";
 
 const BRANDS = [
   {
-    name: "Silkey Mundial",
-    logo: "/brands/silkey-mundial.png",
-    logoTone: "light",
-    source: "https://tienda.silkeymundial.com/",
-  },
-  {
-    name: "Kiepe Uruguay",
-    logo: "/brands/kiepe-uruguay.png",
-    source: "https://www.kiepeuruguay.com/",
+    name: "Revlon Professional",
+    logo: "/brands/revlon-professional.png",
+    source: "https://www.revlonprofessional.com/",
   },
   {
     name: "Plasma",
-    logo: "/brands/pro-plasma-esthetic.png",
-    logoTone: "light",
-    source:
-      "https://www.bing.com/images/search?view=detailV2&ccid=Iw4a%2fRND&id=D28A95B01076269F3C869386758205F429D3FACB&thid=OIP.Iw4a_RND8elzoj0jRZ8UMQHaCY&mediaurl=https%3a%2f%2flipglossandaftershave.com%2fwp-content%2fuploads%2f2024%2f01%2fPro-Plasma-Esthetics-Logo-DD.png",
+    logo: "/brands/plasma-logo.png",
+    source: "https://www.instagram.com/plasmaesthetic/",
   },
   {
-    name: "Wella Professionals",
-    logo: "/brands/wella-professionals.png",
+    name: "Wella",
+    logo: "/brands/wella-logo.png",
     source: "https://www.wella.com/professional/es-ES",
+  },
+  {
+    name: "Kiepe Professional",
+    logo: "/brands/kiepe-professional-logo.png",
+    source: "https://www.kiepeuruguay.com/",
+  },
+  {
+    name: "Beautymax Distribuidora",
+    logo: "/brands/beautymax-distribuidora-logo.png",
+    source: "https://beautymaxuy.com/",
+  },
+  {
+    name: "Silkey Professional",
+    logo: "/brands/silkey-professional-logo.png",
+    source: "https://tienda.silkeymundial.com/",
   },
 ];
 
@@ -78,55 +85,55 @@ const TOOLS_PRODUCTS = [
 
 const PRODUCTS_CATALOG = [
   {
-    name: "Pro You The Lifter - Deco profesional",
-    image: "/productos/proyou-lifter-promo.png",
-    description: "Polvo decolorante de alto rendimiento para aclaraciones parejas en salon.",
-  },
-  {
-    name: "Pro You The Color Maker - Coloracion profesional",
-    image: "/productos/proyou-colormaker-promo.png",
-    description: "Coloracion permanente con cobertura uniforme y brillo duradero desde la primera aplicacion.",
-  },
-  {
-    name: "Pro You The Color Maker 90 ml",
-    image: "/productos/proyou-colormaker-90ml.png",
-    description: "Tono intenso en formato 90 ml, ideal para servicio tecnico diario.",
-  },
-  {
-    name: "Linea Pro You Color Maker Chroma Art",
-    image: "/productos/proyou-colormaker-linea-art.png",
-    description: "Linea de coloracion con variedad de tonos para trabajos creativos y comerciales.",
-  },
-  {
-    name: "Pro You Color Maker + Aloe Vera",
+    name: "Pro You The Color Maker + Aloe Vera",
     image: "/productos/proyou-colormaker-aloe-vera.png",
-    description: "Formula enriquecida con aloe vera para colorar y cuidar la fibra capilar.",
+    description: "Coloracion permanente 90 ml enriquecida con aloe vera para color y cuidado en un solo paso.",
   },
   {
-    name: "Silkey Colorkey Milenium",
-    image: "/productos/silkey-colorkey-milenium.png",
-    description: "Coloracion en crema con buena cobertura y tonos estables para uso profesional.",
+    name: "Plasma Deco 9 Tonos",
+    image: "/productos/plasma-deco-9-tonos.png",
+    description: "Decolorante con accion tonalizante para neutralizar reflejos no deseados.",
   },
   {
-    name: "Pro You The Setter Hairspray",
-    image: "/productos/proyou-setter-hairspray.png",
-    description: "Laca de fijacion extrema con control de brillo para peinados de larga duracion.",
-  },
-  {
-    name: "Pro You The Lifter 1 kg",
-    image: "/productos/proyou-lifter-balde.png",
-    description: "Presentacion de 1 kg para trabajos intensivos de decoloracion en cabina.",
+    name: "Plasma Mix Triaminico (Caja)",
+    image: "/productos/plasma-mix-triaminico-box.png",
+    description: "Ampollas nutritivas de cisteina, cistina y metionina para apoyo tecnico en salon.",
   },
   {
     name: "Wella Color Touch",
     image: "/productos/wella-color-touch.png",
-    description: "Coloracion tono sobre tono con acabado brillante y aspecto natural en el cabello.",
+    description: "Coloracion tono sobre tono con acabado brillante y aspecto natural.",
+  },
+  {
+    name: "Silkey Colorkey Milenium",
+    image: "/productos/silkey-colorkey-milenium.png",
+    description: "Coloracion crema de uso profesional con cobertura pareja y estabilidad de tono.",
+  },
+  {
+    name: "Revlon Equave Bi-Face",
+    image: "/productos/revlon-equave-biface.png",
+    description: "Acondicionador bifasico sin enjuague para desenredar e hidratar al instante.",
+  },
+  {
+    name: "Pro You The Setter Hairspray",
+    image: "/productos/proyou-setter-hairspray.png",
+    description: "Laca de fijacion extrema con control de brillo para peinados duraderos.",
+  },
+  {
+    name: "Pro You The Lifter 1 kg",
+    image: "/productos/proyou-lifter-balde.png",
+    description: "Polvo decolorante en balde para aclaraciones intensivas en cabina.",
+  },
+  {
+    name: "Plasma Mix Triaminico (Ampolla)",
+    image: "/productos/plasma-mix-triaminico-ampolla.png",
+    description: "Ampolla nutritiva concentrada para complementar tratamientos capilares.",
   },
 ];
 
 function App() {
   const totalProducts = PRODUCTS_CATALOG.length + TOOLS_PRODUCTS.length;
-  const featuredProducts = PRODUCTS_CATALOG.slice(0, 8);
+  const featuredProducts = PRODUCTS_CATALOG;
   const featuredTools = TOOLS_PRODUCTS;
 
   const getWhatsappProductUrl = (productName) =>
