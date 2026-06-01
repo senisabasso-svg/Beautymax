@@ -293,17 +293,6 @@ function App() {
           </div>
         </section>
 
-        <section className="newsletter-section">
-          <div className="container">
-            <h2>Recibi novedades de Beautymax</h2>
-            <p>Dejanos tu correo y te compartimos lanzamientos y listas para profesionales.</p>
-            <div className="newsletter-form" role="form" aria-label="Suscripcion a novedades">
-              <input type="email" placeholder="Correo electronico" />
-              <button type="button">Suscribirme</button>
-            </div>
-          </div>
-        </section>
-
         <section className="videos-section">
           <div className="container">
             <h2>Videos de herramientas</h2>
@@ -349,11 +338,6 @@ function App() {
                 +598 97 428 888
               </a>
             </p>
-          </div>
-          <div>
-            <strong>Formas de pago</strong>
-            <p>American Express - Diners Club - Mastercard - OCA - Visa</p>
-            <small>© 2026 Beautymax. Todos los derechos reservados.</small>
           </div>
         </div>
       </footer>
