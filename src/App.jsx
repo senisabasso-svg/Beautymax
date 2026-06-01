@@ -77,7 +77,7 @@ const TOOLS_PRODUCTS = [
     description: "Primer plano del modelo ergonomico black con terminacion premium.",
   },
   {
-    name: "Kiepe Entresacar con Estuche (Tijera para zurdos)",
+    name: "Kiepe Entresacar con Estuche - Tijera para zurdo",
     image: "/herramientas/kiepe-zurdo-front.png",
     description: "Modelo para zurdos en presentacion de estuche profesional.",
   },
