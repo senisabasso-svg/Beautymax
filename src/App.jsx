@@ -68,7 +68,7 @@ const TOOLS_PRODUCTS = [
   },
   {
     name: "Kiepe Presentacion Caja Blanca",
-    image: "/herramientas/kiepe-ergonomic-box-sleeve.png",
+    image: "/herramientas/kiepe-presentacion-caja-blanca-nueva.png",
     description: "Caja de presentacion de linea Kiepe, ideal para exhibicion y entrega.",
   },
   {
@@ -77,9 +77,9 @@ const TOOLS_PRODUCTS = [
     description: "Primer plano del modelo ergonomico black con terminacion premium.",
   },
   {
-    name: "Trimmer Hepike Profesional",
-    image: "/herramientas/hepike-trimmer-pro.png",
-    description: "Trimmer inalambrico para detalles, contornos y terminaciones de barberia.",
+    name: "Kiepe Entresacar con Estuche (Tijera para zurdos)",
+    image: "/herramientas/kiepe-zurdo-front.png",
+    description: "Modelo para zurdos en presentacion de estuche profesional.",
   },
 ];
 
