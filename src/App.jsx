@@ -88,6 +88,11 @@ const TOOLS_PRODUCTS = [
     description: "Calidad 4 estrelllas - acero japones - filo de navaja - tijera para zurdos",
   },
   {
+    name: "Kiepe Entresacar Monster cut",
+    image: "/herramientas/kiepe-zurdo-entresacar-nueva.png",
+    description: "Calidad 4 estrelllas - acero japones - filo de navaja - tijera para zurdos",
+  },
+  {
     name: "Maquinas Hepike By Kiepe",
     image: "/herramientas/maquinas-hepike-by-kiepe.png",
     description: "Maquina profesional para terminaciones y detalles.",
