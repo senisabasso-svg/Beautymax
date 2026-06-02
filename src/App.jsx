@@ -50,7 +50,7 @@ const TOOLS_PRODUCTS = [
   {
     name: "Kiepe Italia - Monster cut",
     image: "/herramientas/kiepe-entresacar-kit.png",
-    description: "Calidad 4 estrelllas - acero japones - filo de navaja",
+    description: "Calidad 4 estrelllas - acero japones - filo de navaja - tijera para zurdos",
   },
   {
     name: "Kiepe Italia - Monster cut",
@@ -75,17 +75,17 @@ const TOOLS_PRODUCTS = [
   {
     name: "Kiepe Italia - Monster cut",
     image: "/herramientas/kiepe-gold-duo-set.png",
-    description: "Calidad 4 estrelllas - acero japones - filo de navaja - tijera para zurdos",
+    description: "Calidad 4 estrelllas - acero japones - filo de navaja",
   },
   {
     name: "Kiepe Italia - Monster cut",
     image: "/herramientas/kiepe-zurdo-front.png",
-    description: "Calidad 4 estrelllas - acero japones - filo de navaja - tijera para zurdos",
+    description: "Calidad 4 estrelllas - acero japones - filo de navaja",
   },
   {
     name: "Kiepe Procut",
     image: "/herramientas/kiepe-procut-nueva.png",
-    description: "Calidad 4 estrelllas - acero japones - filo de navaja",
+    description: "Calidad 4 estrelllas - acero japones - filo de navaja - tijera para zurdos",
   },
   {
     name: "Maquinas Hepike By Kiepe",
