@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { isSupabaseConfigured, supabase } from "../../lib/supabase";
+import { getUserFriendlyError } from "../../lib/userFriendlyErrors";
 import "../../admin.css";
 
 export default function AdminLogin() {
@@ -31,7 +32,7 @@ export default function AdminLogin() {
       if (signInError) throw signInError;
       navigate("/admin/panel");
     } catch (submitError) {
-      setError(submitError.message);
+      setError(getUserFriendlyError(submitError, "login"));
     } finally {
       setLoading(false);
     }

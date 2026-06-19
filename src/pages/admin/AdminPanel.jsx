@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CATALOG_BUCKET, isSupabaseConfigured, supabase } from "../../lib/supabase";
 import { seedCatalogFromDefaults } from "../../lib/seedCatalog";
+import { findDuplicateSectionSlug, getUserFriendlyError } from "../../lib/userFriendlyErrors";
 import "../../admin.css";
 
 const EMPTY_SECTION = {
@@ -86,7 +87,7 @@ export default function AdminPanel() {
       ]);
 
     if (sectionsError || productsError) {
-      setError(sectionsError?.message || productsError?.message);
+      setError(getUserFriendlyError(sectionsError || productsError));
       setLoading(false);
       return;
     }
@@ -114,7 +115,7 @@ export default function AdminPanel() {
       setMessage(`Se importaron ${count} secciones con sus productos.`);
       await loadData();
     } catch (seedError) {
-      setError(seedError.message);
+      setError(getUserFriendlyError(seedError));
     }
   };
 
@@ -140,13 +141,18 @@ export default function AdminPanel() {
       sort_order: Number(sectionForm.sort_order) || 0,
     };
 
+    if (findDuplicateSectionSlug(sections, payload.slug, editingSectionId)) {
+      setError("Ya existe una categoría con ese nombre. Por favor, ingrese un nombre diferente.");
+      return;
+    }
+
     const query = editingSectionId
       ? supabase.from("sections").update(payload).eq("id", editingSectionId)
       : supabase.from("sections").insert(payload);
 
     const { error: saveError } = await query;
     if (saveError) {
-      setError(saveError.message);
+      setError(getUserFriendlyError(saveError, "section"));
       return;
     }
 
@@ -175,7 +181,7 @@ export default function AdminPanel() {
     if (!window.confirm("¿Eliminar esta sección y todos sus productos?")) return;
     const { error: deleteError } = await supabase.from("sections").delete().eq("id", sectionId);
     if (deleteError) {
-      setError(deleteError.message);
+      setError(getUserFriendlyError(deleteError, "section"));
       return;
     }
     if (selectedSectionId === sectionId) setSelectedSectionId(null);
@@ -207,7 +213,7 @@ export default function AdminPanel() {
 
     const { error: saveError } = await query;
     if (saveError) {
-      setError(saveError.message);
+      setError(getUserFriendlyError(saveError, "product"));
       return;
     }
 
@@ -230,9 +236,8 @@ export default function AdminPanel() {
 
   const handleDeleteProduct = async (productId) => {
     if (!window.confirm("¿Eliminar este producto?")) return;
-    const { error: deleteError } = await supabase.from("products").delete().eq("id", productId);
     if (deleteError) {
-      setError(deleteError.message);
+      setError(getUserFriendlyError(deleteError, "product"));
       return;
     }
     setMessage("Producto eliminado.");
@@ -251,7 +256,7 @@ export default function AdminPanel() {
       setProductForm((current) => ({ ...current, image_url: publicUrl }));
       setMessage("Imagen subida correctamente.");
     } catch (uploadError) {
-      setError(uploadError.message);
+      setError(getUserFriendlyError(uploadError, "upload"));
     } finally {
       setUploading(false);
       event.target.value = "";
