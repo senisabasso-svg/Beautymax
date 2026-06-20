@@ -2,6 +2,7 @@ import { useState } from "react";
 import { OrganicProProductContent } from "../components/OrganicProProductContent";
 import { WhatsappIcon } from "../components/WhatsappIcon";
 import { BRANDS, TOOLS_VIDEOS, WHATSAPP_PHONE, WHATSAPP_URL } from "../data/catalogDefaults";
+import { applyLockedSectionConfig } from "../data/lockedSections";
 import { useCatalog } from "../hooks/useCatalog";
 import "../App.css";
 
@@ -125,7 +126,8 @@ export default function Storefront() {
   const { sections, productsBySectionId, loading } = useCatalog();
   const [activeVideoIndex, setActiveVideoIndex] = useState(0);
 
-  const navSections = sections.filter((section) => section.show_in_nav);
+  const displaySections = sections.map(applyLockedSectionConfig);
+  const navSections = displaySections.filter((section) => section.show_in_nav);
 
   const getWhatsappProductUrl = (productName) =>
     `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(
@@ -188,7 +190,7 @@ export default function Storefront() {
             </div>
           </section>
         ) : (
-          sections.map((section) => (
+          displaySections.map((section) => (
             <SectionBlock
               key={section.id}
               section={section}

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { CATALOG_BUCKET, isSupabaseConfigured, supabase } from "../../lib/supabase";
 import { seedCatalogFromDefaults } from "../../lib/seedCatalog";
 import { findDuplicateSectionSlug, getUserFriendlyError } from "../../lib/userFriendlyErrors";
+import { isLockedSection, isOrganicProSection } from "../../data/lockedSections";
 import "../../admin.css";
 
 const EMPTY_SECTION = {
@@ -63,6 +64,7 @@ export default function AdminPanel() {
   const [productForm, setProductForm] = useState(EMPTY_PRODUCT);
   const [editingSectionId, setEditingSectionId] = useState(null);
   const [editingProductId, setEditingProductId] = useState(null);
+  const [sectionFormMode, setSectionFormMode] = useState("idle");
   const [uploading, setUploading] = useState(false);
 
   const selectedSection = useMemo(
@@ -122,6 +124,7 @@ export default function AdminPanel() {
   const resetSectionForm = () => {
     setSectionForm(EMPTY_SECTION);
     setEditingSectionId(null);
+    setSectionFormMode("create");
   };
 
   const resetProductForm = () => {
@@ -133,6 +136,12 @@ export default function AdminPanel() {
     event.preventDefault();
     setMessage("");
     setError("");
+
+    const editingSection = sections.find((section) => section.id === editingSectionId);
+    if (isLockedSection(editingSection)) {
+      setError("Esta sección tiene diseño fijo y no se puede modificar.");
+      return;
+    }
 
     const payload = {
       ...sectionForm,
@@ -157,11 +166,24 @@ export default function AdminPanel() {
     }
 
     setMessage(editingSectionId ? "Sección actualizada." : "Sección creada.");
-    resetSectionForm();
+    setSectionForm(EMPTY_SECTION);
+    setEditingSectionId(null);
+    setSectionFormMode("idle");
     await loadData();
   };
 
   const handleEditSection = (section) => {
+    if (isLockedSection(section)) {
+      setError("");
+      setMessage("Organic Pro es una sección fija. Podés gestionar sus productos en el panel de la derecha.");
+      setSelectedSectionId(section.id);
+      setEditingSectionId(null);
+      setSectionForm(EMPTY_SECTION);
+      setSectionFormMode("idle");
+      return;
+    }
+
+    setSectionFormMode("edit");
     setEditingSectionId(section.id);
     setSectionForm({
       slug: section.slug,
@@ -178,6 +200,12 @@ export default function AdminPanel() {
   };
 
   const handleDeleteSection = async (sectionId) => {
+    const section = sections.find((item) => item.id === sectionId);
+    if (isLockedSection(section)) {
+      setError("Esta sección no se puede eliminar.");
+      return;
+    }
+
     if (!window.confirm("¿Eliminar esta sección y todos sus productos?")) return;
     const { error: deleteError } = await supabase.from("sections").delete().eq("id", sectionId);
     if (deleteError) {
@@ -186,7 +214,9 @@ export default function AdminPanel() {
     }
     if (selectedSectionId === sectionId) setSelectedSectionId(null);
     setMessage("Sección eliminada.");
-    resetSectionForm();
+    setSectionForm(EMPTY_SECTION);
+    setEditingSectionId(null);
+    setSectionFormMode("idle");
     await loadData();
   };
 
@@ -263,6 +293,9 @@ export default function AdminPanel() {
     }
   };
 
+  const isSelectedSectionLocked = isLockedSection(selectedSection);
+  const showSectionForm = sectionFormMode === "create" || sectionFormMode === "edit";
+
   return (
     <div className="admin-shell">
       <header className="admin-topbar">
@@ -309,6 +342,8 @@ export default function AdminPanel() {
             </div>
 
             <form className="admin-form admin-form-compact" onSubmit={handleSectionSubmit}>
+              {showSectionForm ? (
+                <>
               <label>
                 Título
                 <input
@@ -403,22 +438,56 @@ export default function AdminPanel() {
               <button type="submit" className="admin-btn admin-btn-primary">
                 {editingSectionId ? "Guardar sección" : "Crear sección"}
               </button>
+                </>
+              ) : isSelectedSectionLocked ? (
+                <div className="admin-locked-section">
+                  <span className="admin-locked-badge">Sección fija</span>
+                  <h3>{selectedSection?.title}</h3>
+                  <p className="admin-muted">
+                    El nombre y diseño de Organic Pro están bloqueados. Seleccioná esta categoría y gestioná
+                    sus productos en el panel de la derecha.
+                  </p>
+                </div>
+              ) : (
+                <p className="admin-muted">Usá «Nueva» para crear una sección o «Editar» en la lista.</p>
+              )}
             </form>
 
             <ul className="admin-list">
               {sections.map((section) => (
                 <li key={section.id} className={section.id === selectedSectionId ? "is-active" : ""}>
-                  <button type="button" className="admin-list-select" onClick={() => setSelectedSectionId(section.id)}>
-                    <strong>{section.title}</strong>
+                  <button
+                    type="button"
+                    className="admin-list-select"
+                    onClick={() => {
+                      setSelectedSectionId(section.id);
+                      setSectionFormMode("idle");
+                      setEditingSectionId(null);
+                      setSectionForm(EMPTY_SECTION);
+                      if (isLockedSection(section)) {
+                        setMessage("Gestioná los productos de Organic Pro en el panel de la derecha.");
+                      } else {
+                        setMessage("");
+                      }
+                    }}
+                  >
+                    <strong>
+                      {section.title}
+                      {isLockedSection(section) && <span className="admin-locked-badge inline">Fija</span>}
+                    </strong>
                     <span>{section.slug}</span>
                   </button>
                   <div className="admin-list-actions">
-                    <button type="button" onClick={() => handleEditSection(section)}>
-                      Editar
-                    </button>
-                    <button type="button" className="danger" onClick={() => handleDeleteSection(section.id)}>
-                      Eliminar
-                    </button>
+                    {!isLockedSection(section) && (
+                      <>
+                        <button type="button" onClick={() => handleEditSection(section)}>
+                          Editar
+                        </button>
+                        <button type="button" className="danger" onClick={() => handleDeleteSection(section.id)}>
+                          Eliminar
+                        </button>
+                      </>
+                    )}
                   </div>
                 </li>
               ))}
@@ -484,7 +553,7 @@ export default function AdminPanel() {
                       onChange={(event) => setProductForm({ ...productForm, sort_order: event.target.value })}
                     />
                   </label>
-                  {selectedSection.section_type === "brand_featured" && (
+                  {isOrganicProSection(selectedSection) && (
                     <>
                       <label>
                         Volumen (opcional)
