@@ -55,11 +55,12 @@ body {
 
 .brand-name {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: clamp(0.78rem, 1.6vw, 1.15rem);
   font-weight: 700;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   line-height: 1.2;
+  max-width: min(520px, 58vw);
 }
 
 .site-nav {
@@ -455,6 +456,73 @@ a.organic-pro-card:hover {
   color: #111111;
   text-decoration: none;
   font-weight: 600;
+}
+
+.seo-inline-links,
+.footer-seo-links {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.seo-inline-links a,
+.footer-seo-links a {
+  color: #111111;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.seo-page-section {
+  background: #ffffff;
+}
+
+.seo-page {
+  padding-bottom: 12px;
+}
+
+.seo-page h1 {
+  margin: 8px 0 16px;
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  line-height: 1.25;
+}
+
+.seo-copy {
+  margin: 0 0 12px;
+  max-width: 72ch;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.seo-breadcrumb {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.seo-breadcrumb a {
+  color: #111111;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.seo-related {
+  margin-top: 32px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+.seo-related ul {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.seo-related a {
+  color: #111111;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 @media (max-width: 980px) {

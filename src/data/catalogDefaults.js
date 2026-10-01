@@ -267,7 +267,7 @@ export const BRANDS = [
   {
     name: "Beautymax Distribuidora",
     logo: "/brands/beautymax-distribuidora-logo.png",
-    source: "https://beautymaxuy.com/",
+    source: "https://www.beautymaxuy.com/",
   },
   {
     name: "Silkey Professional",

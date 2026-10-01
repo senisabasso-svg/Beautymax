@@ -1,10 +1,23 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { OrganicProProductContent } from "../components/OrganicProProductContent";
+import SeoHead from "../components/SeoHead";
 import { WhatsappIcon } from "../components/WhatsappIcon";
 import { BRANDS, TOOLS_VIDEOS, WHATSAPP_PHONE, WHATSAPP_URL } from "../data/catalogDefaults";
 import { applyLockedSectionConfig } from "../data/lockedSections";
+import { HOME_SEO } from "../data/seoPages";
 import { useCatalog } from "../hooks/useCatalog";
+import { productImageAlt } from "../lib/catalogFilters";
 import "../App.css";
+
+const BRAND_INTERNAL_LINKS = {
+  "Revlon Professional": "/revlon",
+  Wella: "/wella",
+  "Kiepe Professional": "/kiepe",
+  "Silkey Professional": "/silkey",
+  "Organic Pro": "/organic-pro",
+  "Beautymax Distribuidora": "/",
+};
 
 function sectionClassName(section) {
   if (section.section_type === "brand_featured") return "organic-pro-section";
@@ -20,8 +33,10 @@ function ProductCard({ product, whatsappPrefix = "" }) {
   )}`;
 
   return (
-    <article key={product.id} className="product-card">
-      {product.image_url && <img src={product.image_url} alt={product.name} />}
+    <article className="product-card">
+      {product.image_url && (
+        <img src={product.image_url} alt={productImageAlt(product, whatsappPrefix || "catálogo")} loading="lazy" />
+      )}
       <h3>{product.name}</h3>
       {product.show_description && product.description && <p>{product.description}</p>}
       <a href={whatsappUrl} target="_blank" rel="noreferrer" className="whatsapp-link">
@@ -39,15 +54,20 @@ function SectionBlock({ section, products, getWhatsappProductUrl }) {
         <div className="container">
           <div className="organic-pro-hero">
             {section.hero_logo && (
-              <img src={section.hero_logo} alt={section.title} className="organic-pro-hero-logo" />
+              <img
+                src={section.hero_logo}
+                alt="Organic Pro – línea profesional sin sal en Beautymax Uruguay"
+                className="organic-pro-hero-logo"
+                loading="lazy"
+              />
             )}
             <div>
               {section.kicker && <p className="organic-pro-kicker">{section.kicker}</p>}
               <h2>{section.title}</h2>
               {section.hero_text && <p className="organic-pro-hero-text">{section.hero_text}</p>}
-              <a href="#productos" className="organic-pro-back">
-                Volver a productos
-              </a>
+              <Link to="/organic-pro" className="organic-pro-back">
+                Ver página Organic Pro
+              </Link>
             </div>
           </div>
 
@@ -97,6 +117,13 @@ function SectionBlock({ section, products, getWhatsappProductUrl }) {
               </article>
             ))}
           </div>
+          <p className="seo-inline-links">
+            Explorar: <Link to="/herramientas">Herramientas</Link>
+            {" · "}
+            <Link to="/maquinas-barberia">Máquinas barbería</Link>
+            {" · "}
+            <Link to="/coloracion">Coloración</Link>
+          </p>
         </div>
       </section>
     );
@@ -117,6 +144,28 @@ function SectionBlock({ section, products, getWhatsappProductUrl }) {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
+        {section.slug === "productos" && (
+          <p className="seo-inline-links">
+            Ver por marca: <Link to="/wella">Wella</Link>
+            {" · "}
+            <Link to="/revlon">Revlon</Link>
+            {" · "}
+            <Link to="/silkey">Silkey</Link>
+            {" · "}
+            <Link to="/coloracion">Coloración</Link>
+            {" · "}
+            <Link to="/tratamientos">Tratamientos</Link>
+          </p>
+        )}
+        {section.slug === "herramientas" && (
+          <p className="seo-inline-links">
+            Más info: <Link to="/kiepe">Kiepe Professional</Link>
+            {" · "}
+            <Link to="/herramientas">Herramientas</Link>
+            {" · "}
+            <Link to="/maquinas-barberia">Máquinas barbería</Link>
+          </p>
+        )}
       </div>
     </section>
   );
@@ -144,19 +193,30 @@ export default function Storefront() {
 
   return (
     <>
+      <SeoHead title={HOME_SEO.title} description={HOME_SEO.description} path="/" />
       <div className="top-announcement">Paga en cuotas sin interes - Asesoramiento para profesionales</div>
 
       <header className="site-header">
         <div className="container header-main">
           <a className="brand" href="#inicio">
-            <h1 className="brand-name">Beautymax Uruguay</h1>
+            <h1 className="brand-name">{HOME_SEO.h1}</h1>
           </a>
           <nav className="site-nav">
-            {navSections.map((section) => (
-              <a key={section.id} href={`#${section.slug}`}>
-                {section.nav_label || section.title}
-              </a>
-            ))}
+            {navSections.map((section) =>
+              section.slug === "organic-pro" ? (
+                <Link key={section.id} to="/organic-pro">
+                  {section.nav_label || section.title}
+                </Link>
+              ) : section.slug === "herramientas" ? (
+                <Link key={section.id} to="/herramientas">
+                  {section.nav_label || section.title}
+                </Link>
+              ) : (
+                <a key={section.id} href={`#${section.slug}`}>
+                  {section.nav_label || section.title}
+                </a>
+              ),
+            )}
             <a href="#marcas">Marcas</a>
             <a href="#contacto">Contacto</a>
           </nav>
@@ -167,7 +227,7 @@ export default function Storefront() {
         <div className="container hero-content">
           <img
             src="/hero/beautymax-hero-poster.png"
-            alt="Beautymax: distribuidora de peluquerías e insumos profesionales en Uruguay"
+            alt="Beautymax Uruguay: distribuidora de peluquerías y barberías con insumos profesionales"
             className="hero-poster"
           />
           <div className="hero-actions">
@@ -204,18 +264,46 @@ export default function Storefront() {
           <div className="container">
             <h2>Marcas profesionales para peluquerías</h2>
             <div className="brand-grid">
-              {BRANDS.map((brand) => (
-                <a key={brand.name} href={brand.source} target="_blank" rel="noreferrer" className="brand-item">
+              {BRANDS.map((brand) => {
+                const internal = BRAND_INTERNAL_LINKS[brand.name];
+                const className = ["brand-logo", brand.logoTone === "light" && "brand-logo-light", brand.logoClass]
+                  .filter(Boolean)
+                  .join(" ");
+                const img = (
                   <img
                     src={brand.logo}
-                    alt={`${brand.name} en Beautymax, distribuidora de peluquerías Uruguay`}
-                    className={["brand-logo", brand.logoTone === "light" && "brand-logo-light", brand.logoClass]
-                      .filter(Boolean)
-                      .join(" ")}
+                    alt={`${brand.name} – marca profesional en Beautymax, distribuidora Uruguay`}
+                    className={className}
+                    loading="lazy"
                   />
-                </a>
-              ))}
+                );
+
+                if (internal) {
+                  return (
+                    <Link key={brand.name} to={internal} className="brand-item">
+                      {img}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <a key={brand.name} href={brand.source} target="_blank" rel="noreferrer" className="brand-item">
+                    {img}
+                  </a>
+                );
+              })}
             </div>
+            <p className="seo-inline-links">
+              Páginas de marca: <Link to="/wella">Wella</Link>
+              {" · "}
+              <Link to="/revlon">Revlon</Link>
+              {" · "}
+              <Link to="/kiepe">Kiepe</Link>
+              {" · "}
+              <Link to="/organic-pro">Organic Pro</Link>
+              {" · "}
+              <Link to="/silkey">Silkey</Link>
+            </p>
           </div>
         </section>
 
@@ -270,10 +358,26 @@ export default function Storefront() {
             </p>
           </div>
           <div>
-            <strong>Servicio profesional</strong>
-            <p>
-              Venta y asesoramiento para peluquerías, barberías y salones de belleza en todo el país.
-              Consultá stock y catálogo por WhatsApp.
+            <strong>Categorías y marcas</strong>
+            <p className="footer-seo-links">
+              <Link to="/coloracion">Coloración</Link>
+              {" · "}
+              <Link to="/tratamientos">Tratamientos</Link>
+              {" · "}
+              <Link to="/herramientas">Herramientas</Link>
+              {" · "}
+              <Link to="/maquinas-barberia">Máquinas barbería</Link>
+            </p>
+            <p className="footer-seo-links">
+              <Link to="/wella">Wella</Link>
+              {" · "}
+              <Link to="/revlon">Revlon</Link>
+              {" · "}
+              <Link to="/kiepe">Kiepe</Link>
+              {" · "}
+              <Link to="/organic-pro">Organic Pro</Link>
+              {" · "}
+              <Link to="/silkey">Silkey</Link>
             </p>
           </div>
         </div>
