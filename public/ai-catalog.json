@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "name": "Beautymax Uruguay",
+  "url": "https://www.beautymaxuy.com/",
+  "description": "Distribuidora de insumos profesionales para peluquerías y barberías en Uruguay.",
+  "contact": {
+    "whatsapp": "+59897428888",
+    "instagram": "https://www.instagram.com/beautymaxuy/"
+  },
+  "brands": ["Wella", "Revlon Professional", "Kiepe Professional", "Organic Pro", "Silkey Professional", "Plasma", "Pro You"],
+  "pages": [
+    { "path": "/", "title": "Inicio" },
+    { "path": "/wella", "title": "Wella Professionals" },
+    { "path": "/revlon", "title": "Revlon Professional" },
+    { "path": "/kiepe", "title": "Kiepe Professional" },
+    { "path": "/organic-pro", "title": "Organic Pro" },
+    { "path": "/silkey", "title": "Silkey Professional" },
+    { "path": "/coloracion", "title": "Coloración profesional" },
+    { "path": "/tratamientos", "title": "Tratamientos capilares" },
+    { "path": "/herramientas", "title": "Herramientas" },
+    { "path": "/maquinas-barberia", "title": "Máquinas de barbería" }
+  ]
+}

@@ -1,0 +1,21 @@
+# Beautymax Uruguay
+
+> Distribuidora de insumos profesionales para peluquerías y barberías en Uruguay (Wella, Revlon, Kiepe, Organic Pro, Plasma, Pro You, Silkey). Venta y asesoramiento exclusivo para profesionales. Contacto por WhatsApp +598 97 428 888.
+
+## Páginas principales
+
+- [Inicio](https://www.beautymaxuy.com/): catálogo destacado, marcas y contacto por WhatsApp
+- [Wella](https://www.beautymaxuy.com/wella): coloración Wella Professionals en Uruguay
+- [Revlon](https://www.beautymaxuy.com/revlon): Revlon Professional y cuidado en cabina
+- [Kiepe](https://www.beautymaxuy.com/kiepe): tijeras y herramientas Kiepe Professional
+- [Organic Pro](https://www.beautymaxuy.com/organic-pro): línea sin sal Organic Pro
+- [Silkey](https://www.beautymaxuy.com/silkey): coloración Silkey Professional
+- [Coloración](https://www.beautymaxuy.com/coloracion): coloración profesional para peluquerías
+- [Tratamientos](https://www.beautymaxuy.com/tratamientos): tratamientos capilares de cabina
+- [Herramientas](https://www.beautymaxuy.com/herramientas): herramientas profesionales
+- [Máquinas de barbería](https://www.beautymaxuy.com/maquinas-barberia): máquinas y trimmers
+
+## Contacto
+
+- WhatsApp: https://wa.me/59897428888
+- Instagram: https://www.instagram.com/beautymaxuy/
