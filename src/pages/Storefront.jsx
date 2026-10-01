@@ -149,7 +149,7 @@ export default function Storefront() {
       <header className="site-header">
         <div className="container header-main">
           <a className="brand" href="#inicio">
-            <span className="brand-name">Beautymax Uruguay</span>
+            <h1 className="brand-name">Beautymax Uruguay</h1>
           </a>
           <nav className="site-nav">
             {navSections.map((section) => (
@@ -167,7 +167,7 @@ export default function Storefront() {
         <div className="container hero-content">
           <img
             src="/hero/beautymax-hero-poster.png"
-            alt="Beautymax Distribuidora - Profesionales de la belleza"
+            alt="Beautymax: distribuidora de peluquerías e insumos profesionales en Uruguay"
             className="hero-poster"
           />
           <div className="hero-actions">
@@ -202,13 +202,13 @@ export default function Storefront() {
 
         <section id="marcas" className="brands-section">
           <div className="container">
-            <h2>Marcas</h2>
+            <h2>Marcas profesionales para peluquerías</h2>
             <div className="brand-grid">
               {BRANDS.map((brand) => (
                 <a key={brand.name} href={brand.source} target="_blank" rel="noreferrer" className="brand-item">
                   <img
                     src={brand.logo}
-                    alt={brand.name}
+                    alt={`${brand.name} en Beautymax, distribuidora de peluquerías Uruguay`}
                     className={["brand-logo", brand.logoTone === "light" && "brand-logo-light", brand.logoClass]
                       .filter(Boolean)
                       .join(" ")}
@@ -252,6 +252,10 @@ export default function Storefront() {
           <div>
             <strong>Beautymax Uruguay</strong>
             <p>
+              Distribuidora de peluquerías y barberías en Uruguay. Insumos profesionales, coloración,
+              tratamientos y herramientas para salones.
+            </p>
+            <p>
               Instagram:{" "}
               <a href="https://www.instagram.com/beautymaxuy/" target="_blank" rel="noreferrer">
                 @beautymaxuy
@@ -263,6 +267,13 @@ export default function Storefront() {
                 <WhatsappIcon />
                 +598 97 428 888
               </a>
+            </p>
+          </div>
+          <div>
+            <strong>Servicio profesional</strong>
+            <p>
+              Venta y asesoramiento para peluquerías, barberías y salones de belleza en todo el país.
+              Consultá stock y catálogo por WhatsApp.
             </p>
           </div>
         </div>

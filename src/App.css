@@ -54,10 +54,12 @@ body {
 }
 
 .brand-name {
+  margin: 0;
   font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: 0.03em;
   text-transform: uppercase;
+  line-height: 1.2;
 }
 
 .site-nav {
