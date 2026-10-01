@@ -1,9 +1,11 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { OrganicProProductContent } from "../components/OrganicProProductContent";
 import SeoHead from "../components/SeoHead";
 import { WhatsappIcon } from "../components/WhatsappIcon";
-import { BRANDS, TOOLS_VIDEOS, WHATSAPP_PHONE, WHATSAPP_URL } from "../data/catalogDefaults";
+import OptimizedImage, { HeroPoster } from "../components/OptimizedImage";
+import CatalogSkeleton from "../components/CatalogSkeleton";
+import LazyVideoCarousel from "../components/LazyVideoCarousel";
+import { BRANDS, WHATSAPP_PHONE, WHATSAPP_URL } from "../data/catalogDefaults";
 import { applyLockedSectionConfig } from "../data/lockedSections";
 import { HOME_SEO } from "../data/seoPages";
 import { useCatalog } from "../hooks/useCatalog";
@@ -34,12 +36,25 @@ function ProductCard({ product, whatsappPrefix = "" }) {
 
   return (
     <article className="product-card">
-      {product.image_url && (
-        <img src={product.image_url} alt={productImageAlt(product, whatsappPrefix || "catálogo")} loading="lazy" />
-      )}
+      <div className="product-card-media">
+        {product.image_url ? (
+          <OptimizedImage
+            src={product.image_url}
+            alt={productImageAlt(product, whatsappPrefix || "catálogo")}
+            width={460}
+            height={460}
+          />
+        ) : null}
+      </div>
       <h3>{product.name}</h3>
       {product.show_description && product.description && <p>{product.description}</p>}
-      <a href={whatsappUrl} target="_blank" rel="noreferrer" className="whatsapp-link">
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noreferrer"
+        className="whatsapp-link"
+        aria-label={`Consultar por WhatsApp sobre ${product.name}`}
+      >
         <WhatsappIcon />
         Consultar por WhatsApp
       </a>
@@ -54,11 +69,12 @@ function SectionBlock({ section, products, getWhatsappProductUrl }) {
         <div className="container">
           <div className="organic-pro-hero">
             {section.hero_logo && (
-              <img
+              <OptimizedImage
                 src={section.hero_logo}
                 alt="Organic Pro – línea profesional sin sal en Beautymax Uruguay"
                 className="organic-pro-hero-logo"
-                loading="lazy"
+                width={110}
+                height={88}
               />
             )}
             <div>
@@ -80,6 +96,7 @@ function SectionBlock({ section, products, getWhatsappProductUrl }) {
                   target="_blank"
                   rel="noreferrer"
                   className="whatsapp-link"
+                  aria-label={`Consultar por WhatsApp sobre Organic Pro ${product.name}`}
                 >
                   <WhatsappIcon />
                   Consultar por WhatsApp
@@ -94,6 +111,7 @@ function SectionBlock({ section, products, getWhatsappProductUrl }) {
               target="_blank"
               rel="noreferrer"
               className="cta-main whatsapp-link"
+              aria-label="Consultar por WhatsApp sobre la línea Organic Pro"
             >
               <WhatsappIcon />
               Consultar línea completa
@@ -173,7 +191,6 @@ function SectionBlock({ section, products, getWhatsappProductUrl }) {
 
 export default function Storefront() {
   const { sections, productsBySectionId, loading } = useCatalog();
-  const [activeVideoIndex, setActiveVideoIndex] = useState(0);
 
   const displaySections = sections.map(applyLockedSectionConfig);
   const navSections = displaySections.filter((section) => section.show_in_nav);
@@ -182,14 +199,6 @@ export default function Storefront() {
     `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(
       `Hola Beautymax, quiero consultar por ${productName}.`,
     )}`;
-
-  const showPrevVideo = () => {
-    setActiveVideoIndex((current) => (current - 1 + TOOLS_VIDEOS.length) % TOOLS_VIDEOS.length);
-  };
-
-  const showNextVideo = () => {
-    setActiveVideoIndex((current) => (current + 1) % TOOLS_VIDEOS.length);
-  };
 
   return (
     <>
@@ -225,8 +234,7 @@ export default function Storefront() {
 
       <section id="inicio" className="hero-section">
         <div className="container hero-content">
-          <img
-            src="/hero/beautymax-hero-poster.png"
+          <HeroPoster
             alt="Beautymax Uruguay: distribuidora de peluquerías y barberías con insumos profesionales"
             className="hero-poster"
           />
@@ -246,7 +254,10 @@ export default function Storefront() {
         {loading ? (
           <section className="products-section">
             <div className="container">
-              <p>Cargando catálogo...</p>
+              <div className="section-head">
+                <h2>Productos destacados</h2>
+              </div>
+              <CatalogSkeleton cards={8} />
             </div>
           </section>
         ) : (
@@ -270,12 +281,15 @@ export default function Storefront() {
                   .filter(Boolean)
                   .join(" ");
                 const img = (
-                  <img
-                    src={brand.logo}
-                    alt={`${brand.name} – marca profesional en Beautymax, distribuidora Uruguay`}
-                    className={className}
-                    loading="lazy"
-                  />
+                  <span className="brand-logo-slot">
+                    <OptimizedImage
+                      src={brand.logo}
+                      alt={`${brand.name} – marca profesional en Beautymax, distribuidora Uruguay`}
+                      className={className}
+                      width={180}
+                      height={55}
+                    />
+                  </span>
                 );
 
                 if (internal) {
@@ -310,27 +324,7 @@ export default function Storefront() {
         <section className="videos-section">
           <div className="container">
             <h2>Videos de herramientas</h2>
-            <div className="video-carousel">
-              <button type="button" className="video-arrow" aria-label="Video anterior" onClick={showPrevVideo}>
-                &#10094;
-              </button>
-              <div className="video-frame">
-                <video
-                  key={TOOLS_VIDEOS[activeVideoIndex]}
-                  className="tools-video"
-                  src={TOOLS_VIDEOS[activeVideoIndex]}
-                  controls
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                />
-              </div>
-              <button type="button" className="video-arrow" aria-label="Siguiente video" onClick={showNextVideo}>
-                &#10095;
-              </button>
-            </div>
+            <LazyVideoCarousel />
           </div>
         </section>
       </main>

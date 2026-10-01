@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import CatalogSkeleton from "../components/CatalogSkeleton";
+import OptimizedImage from "../components/OptimizedImage";
 import SeoHead from "../components/SeoHead";
 import SiteChrome from "../components/SiteChrome";
 import { WhatsappIcon } from "../components/WhatsappIcon";
@@ -34,7 +36,13 @@ export default function SeoCatalogPage({ page }) {
             ))}
 
             <div className="hero-actions" style={{ justifyContent: "flex-start", margin: "18px 0 28px" }}>
-              <a href={whatsappUrl} className="cta-main whatsapp-link" target="_blank" rel="noreferrer">
+              <a
+                href={whatsappUrl}
+                className="cta-main whatsapp-link"
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Consultar por WhatsApp sobre ${page.whatsappLabel}`}
+              >
                 <WhatsappIcon />
                 Consultar {page.whatsappLabel} por WhatsApp
               </a>
@@ -45,7 +53,7 @@ export default function SeoCatalogPage({ page }) {
 
             <h2>Productos disponibles</h2>
             {loading ? (
-              <p>Cargando catálogo...</p>
+              <CatalogSkeleton cards={8} />
             ) : products.length ? (
               <div className="product-grid">
                 {products.map((product) => {
@@ -54,16 +62,25 @@ export default function SeoCatalogPage({ page }) {
                   )}`;
                   return (
                     <article key={product.id} className="product-card">
-                      {product.image_url && (
-                        <img
-                          src={product.image_url}
-                          alt={productImageAlt(product, page.whatsappLabel)}
-                          loading="lazy"
-                        />
-                      )}
+                      <div className="product-card-media">
+                        {product.image_url && (
+                          <OptimizedImage
+                            src={product.image_url}
+                            alt={productImageAlt(product, page.whatsappLabel)}
+                            width={460}
+                            height={460}
+                          />
+                        )}
+                      </div>
                       <h3>{product.name}</h3>
                       {product.show_description && product.description && <p>{product.description}</p>}
-                      <a href={productWhatsapp} target="_blank" rel="noreferrer" className="whatsapp-link">
+                      <a
+                        href={productWhatsapp}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="whatsapp-link"
+                        aria-label={`Consultar por WhatsApp sobre ${product.name}`}
+                      >
                         <WhatsappIcon />
                         Consultar por WhatsApp
                       </a>

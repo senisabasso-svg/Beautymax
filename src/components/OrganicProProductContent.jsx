@@ -1,11 +1,20 @@
+import OptimizedImage from "./OptimizedImage";
+
 export function OrganicProProductContent({ product }) {
   const metadata = product.metadata || {};
 
   return (
     <>
-      {product.image_url && (
-        <img src={product.image_url} alt={`${product.name} – Organic Pro profesional Beautymax Uruguay`} loading="lazy" />
-      )}
+      <div className="product-card-media">
+        {product.image_url && (
+          <OptimizedImage
+            src={product.image_url}
+            alt={`${product.name} – Organic Pro profesional Beautymax Uruguay`}
+            width={460}
+            height={460}
+          />
+        )}
+      </div>
       <h3>{product.name}</h3>
       {metadata.volume && <p className="organic-pro-volume">{metadata.volume}</p>}
       {product.show_description && product.description && <p>{product.description}</p>}
